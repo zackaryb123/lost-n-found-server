@@ -1,7 +1,6 @@
 'use strict';
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-import avatar from '../images/avatar.png';
 
 mongoose.Promise = global.Promise;
 
@@ -11,20 +10,21 @@ const UserSchema = mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     email: {type: String, required: true},
-    avatar: {type: String, default: avatar},
+    avatar: {type: String,
+        default: 'https://res.cloudinary.com/diygdnbei/image/upload/v1519390314/ili0ai3szqqrjv02dqof.png'},
     itemCount:{type: Number, default: 0},
     returnRate:{type: Number, default: 0}
 });
 
 UserSchema.methods.apiRepr = function () {
     return {
-        username: this.username || '',
-        firstName: this.firstName || '',
-        lastName: this.lastName || '',
-        email: this.email || '',
-        avatar: this.avatar || avatar,
-        itemCount: this.itemCount || 0,
-        returnRate: this.returnRate || 0
+        username: this.username,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        avatar: this.avatar,
+        itemCount: this.itemCount,
+        returnRate: this.returnRate
 
     };
 };
