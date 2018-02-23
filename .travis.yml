@@ -1,8 +1,8 @@
 language: node_js
- node_js: node
- services:
-     - mongodb
- deploy:
+node_js: node
+services:
+  - mongodb
+deploy:
    provider: heroku
    api_key: 8323ba78-5121-4a17-a4b2-b3ff55d95046
    app: lost-n-found-server
