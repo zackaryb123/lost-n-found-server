@@ -17,4 +17,14 @@ router.get('/', [jsonParser, jwtAuth], (req, res) => {
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
+
+
+//use params to get the unique state
+// router.get('/items/:name', [jsonParser, jwtAuth], (req, res) => {
+//     let {name} = req.params;
+//    return States.findOne({name: name})
+//        .then(state => res.json(state.apiRepr()))
+//        .catch(err => res.status(500).json({message: 'Internal server error'}));
+// });
+
 module.exports = {router};
