@@ -17,7 +17,14 @@ router.get('/', [jsonParser, jwtAuth], (req, res) => {
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-
+router.put('/', [jsonParser, jwtAuth], (req, res) => {
+    console.log(req.body);
+    return States
+        .findOneAndUpdate({name:req.body.state},
+            {$push: {'items': req.body}})
+        .then(res.status(204).json())
+        .catch(err => {res.status(500).json({messgae: `Internal server error`})});
+});
 
 //use params to get the unique state
 // router.get('/items/:name', [jsonParser, jwtAuth], (req, res) => {
