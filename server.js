@@ -22,8 +22,9 @@ const app = express();
 app.use(morgan('dev'));
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// CORS
+// CORSss
 app.use(
     cors({
         origin: CLIENT_ORIGIN
