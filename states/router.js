@@ -27,4 +27,15 @@ router.put('/post', [jwtAuth, jsonParser], (req, res) => {
         .catch(err => {res.status(500).json({messgae: `Internal server error`})});
 });
 
+router.put('/remove/:state/:index', jwtAuth, (req, res) => {
+    console.log(req.params);
+    const state = req.params.state;
+    const index = req.params.index;
+
+    return States
+        .update({"name": state}, {'$pop': {"items": index}})
+        .then(res.status(204).json())
+        .catch(err => {res.status(500).json({messgae: `Internal server error`})});
+});
+
 module.exports = {router};

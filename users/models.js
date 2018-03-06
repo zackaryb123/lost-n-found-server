@@ -12,8 +12,8 @@ const UserSchema = mongoose.Schema({
     email: {type: String, required: true},
     avatar: {type: String,
         default: 'https://res.cloudinary.com/diygdnbei/image/upload/v1519390314/ili0ai3szqqrjv02dqof.png'},
-    itemCount:{type: Number, default: 0},
-    returnRate:{type: Number, default: 0}
+    // itemCount:{type: Number, default: 0},
+    // returnRate:{type: Number, default: 0}
 });
 
 UserSchema.methods.apiRepr = function () {
@@ -23,8 +23,8 @@ UserSchema.methods.apiRepr = function () {
         lastName: this.lastName,
         email: this.email,
         avatar: this.avatar,
-        itemCount: this.itemCount,
-        returnRate: this.returnRate
+        // itemCount: this.itemCount,
+        // returnRate: this.returnRate
 
     };
 };

@@ -1,20 +1,20 @@
 'use strict';
 const express = require('express');
 const passport = require('passport');
-const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const cloudinary = require('cloudinary');
-const multer = require('multer');
+const {User} = require('../users/models');
+//const cloudinary = require('cloudinary');
+//const multer = require('multer');
 
 const config = require('../config');
 const router = express.Router();
-const upload = multer({ dest: '/images'});
+//const upload = multer({ dest: '/images'});
 
-cloudinary.config({
-    cloud_name: 'diygdnbei',
-    api_key: '754675185139821',
-    api_secret: 'N3eXQJDrvrvL_KWGKi1YYRYFrHk'
-});
+// cloudinary.config({
+//     cloud_name: 'diygdnbei',
+//     api_key: '754675185139821',
+//     api_secret: 'N3eXQJDrvrvL_KWGKi1YYRYFrHk'
+// });
 
 const createAuthToken = function(user) {
   return jwt.sign({user}, config.JWT_SECRET, {
@@ -38,33 +38,32 @@ router.post('/refresh', jwtAuth, (req, res) => {
   res.json({authToken});
 });
 
-router.put('/update', [jwtAuth, upload.single('avatar')], (req, res) => {
+router.put('/update', jwtAuth, /*upload.single('avatar')],*/ (req, res) => {
     const username  = req.user.username;
     console.log(req.body);
-    console.log(req.file);
 
     // if ('file' in req) {
-        cloudinary.v2.uploader.upload(req.file.path,
-            {tags: [req.body]}
-        ).then(function (update) {
+    //     cloudinary.v2.uploader.upload(req.file.path,
+            // {tags: [req.body]}
+        // ).then(function (update) {
             //console.log(update);
             return User
                 .findOneAndUpdate({username: username},
                     {
-                        'email': update.tags[0].email,
-                        'avatar': update.secure_url,
-                        'returnRate': update.tags[0].returnRate,
-                        'itemCount': update.tags[0].itemCount
+                        'email': req.body.email //update.tags[0].email,
+                        // 'avatar': update.secure_url,
+                        // 'returnRate': update.tags[0].returnRate,
+                        // 'itemCount': update.tags[0].itemCount
                     })
                 .then(updatedPost => {
                     console.log(updatedPost);
-                    console.log(`Updating profile for \`${req.params.username}\``);
+                    console.log(`Updating profile for \`${username}\``);
                     res.status(204).json(updatedPost);
                 }).catch(err => {
                     console.log(err);
                     res.status(500).json({messgae: `Internal server error`})
                 });
-        });
+        // });
     // }
     // if (!'file' in req) {
     //     return User
