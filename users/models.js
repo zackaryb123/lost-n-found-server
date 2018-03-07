@@ -11,7 +11,7 @@ const UserSchema = mongoose.Schema({
     lastName: {type: String, required: true},
     email: {type: String, required: true},
     avatar: {type: String,
-        default: 'https://res.cloudinary.com/diygdnbei/image/upload/v1519390314/ili0ai3szqqrjv02dqof.png'},
+        default: 'http://res.cloudinary.com/diygdnbei/image/upload/v1519444005/zumnvvbqi0fo1zthkal7.png'},
     // itemCount:{type: Number, default: 0},
     // returnRate:{type: Number, default: 0}
 });
