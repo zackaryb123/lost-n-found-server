@@ -11,9 +11,7 @@ const UserSchema = mongoose.Schema({
     lastName: {type: String, required: true},
     email: {type: String, required: true},
     avatar: {type: String,
-        default: 'http://res.cloudinary.com/diygdnbei/image/upload/v1519444005/zumnvvbqi0fo1zthkal7.png'},
-    // itemCount:{type: Number, default: 0},
-    // returnRate:{type: Number, default: 0}
+        default: 'https://res.cloudinary.com/diygdnbei/image/upload/v1519444005/zumnvvbqi0fo1zthkal7.png'},
 });
 
 UserSchema.methods.apiRepr = function () {
@@ -23,9 +21,6 @@ UserSchema.methods.apiRepr = function () {
         lastName: this.lastName,
         email: this.email,
         avatar: this.avatar,
-        // itemCount: this.itemCount,
-        // returnRate: this.returnRate
-
     };
 };
 
